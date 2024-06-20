@@ -1,0 +1,94 @@
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Container holding all content */
+.container {
+    text-align: center;
+    padding: 40px;
+}
+
+/* Styles for the table */
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    margin-bottom: 10px; /* Add margin bottom for spacing */
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+thead th {
+    background-color: #ddd;
+}
+
+/* Styles for table cells with risk levels */
+#riskMatrix td {
+    position: relative;
+}
+
+#riskMatrix td[data-risk-level="low"] {
+    background-color: green;
+}
+
+#riskMatrix td[data-risk-level="medium"] {
+    background-color: yellow;
+}
+
+#riskMatrix td[data-risk-level="high"] {
+    background-color: orange;
+}
+
+#riskMatrix td[data-risk-level="very-high"] {
+    background-color: red;
+}
+
+/* Additional spacing for risk rows */
+.riskRow {
+    margin-bottom: 10px;
+}
+
+/* Styles for buttons and form elements */
+.button {
+    margin: 10px;
+}
+/* Flex container for positioning */
+.table-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.matrix {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the table vertically */
+}
+
+.label-vertical {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    margin-left: -10px;
+}
+
+.label-horizontal {
+    margin-top: 10px; /* Adjust as needed */
+    text-align: center;
+}
+
+
