@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая матрица рисков</title>
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Динамическая матрица рисков</h1>
+        <form id="riskForm" style="margin-top: 20px">
+            <div id="riskInputs">
+                <div class="riskRow">
+                    <label for="description1">Описание:</label>
+                    <input type="text" id="description1" name="description" required>
+                    <label for="probability1">Вероятность:</label>
+                    <input type="number" id="probability1" name="probability" min="1" max="5" required>
+                    <label for="impact1">Влияние:</label>
+                    <input type="number" id="impact1" name="impact" min="1" max="5" required>
+                </div>
+            </div>
+            <button type="button" id="addRow" style="margin-right: 25px;margin-top: 25px;">Добавить строку</button>
+            <button type="button" id="deleteRow" style="margin-right: 25px;">Удалить строку</button>
+            <button type="submit">Отобразить матрицу</button>
+        </form>
+        <input type="file" id="excelFileInput" accept=".xls,.xlsx" style="margin-top: 25px;margin-right: 25px;">
+        <button type="button" id="uploadExcel">Загрузить Excel</button>
+        <div class="table-container" style="width: 350px; margin-left: 750px; margin-top: 30px;">
+            <div class="label-vertical">Влияние</div>
+            <div class="matrix">
+              <table id="riskMatrix">
+                <tbody>
+                    <tr>
+                        <th>5</th>
+                        <td id="5-1" class="cell"></td>
+                        <td id="5-2" class="cell"></td>
+                        <td id="5-3" class="cell"></td>
+                        <td id="5-4" class="cell"></td>
+                        <td id="5-5" class="cell"></td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td id="4-1" class="cell"></td>
+                        <td id="4-2" class="cell"></td>
+                        <td id="4-3" class="cell"></td>
+                        <td id="4-4" class="cell"></td>
+                        <td id="4-5" class="cell"></td>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <td id="3-1" class="cell"></td>
+                        <td id="3-2" class="cell"></td>
+                        <td id="3-3" class="cell"></td>
+                        <td id="3-4" class="cell"></td>
+                        <td id="3-5" class="cell"></td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td id="2-1" class="cell"></td>
+                        <td id="2-2" class="cell"></td>
+                        <td id="2-3" class="cell"></td>
+                        <td id="2-4" class="cell"></td>
+                        <td id="2-5" class="cell"></td>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td id="1-1" class="cell"></td>
+                        <td id="1-2" class="cell"></td>
+                        <td id="1-3" class="cell"></td>
+                        <td id="1-4" class="cell"></td>
+                        <td id="1-5" class="cell"></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="label-horizontal">Вероятность</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
