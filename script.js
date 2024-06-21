@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let rowCount = 1;
 
-    // Function to add a new row of inputs
     const addRow = () => {
         rowCount++;
         const newRow = document.createElement("div");
@@ -21,15 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
             <input type="number" id="impact${rowCount}" name="impact" min="1" max="5" required>
         `;
         riskInputs.appendChild(newRow);
-        updateMatrix(); // Update matrix after adding row
+        updateMatrix();
     };
 
-    // Function to delete the last added row
     const deleteRow = () => {
         if (rowCount > 1) {
             riskInputs.removeChild(riskInputs.lastElementChild);
             rowCount--;
-            updateMatrix(); // Update matrix after deleting row
+            updateMatrix();
         }
     };
 
@@ -53,9 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     initializeMatrix();
 
-    // Function to initialize or update matrix with current form data
     const updateMatrix = () => {
-        // Initialize all cells with 0
         for (let impact = 1; impact <= 5; impact++) {
             for (let probability = 1; probability <= 5; probability++) {
                 const cell = document.getElementById(`${impact}-${probability}`);
@@ -63,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        // Update matrix with current form data
         const probabilities = form.querySelectorAll("input[name='probability']");
         const impacts = form.querySelectorAll("input[name='impact']");
 
@@ -81,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
         riskMatrix.style.display = "table";
     };
 
-    // Event listeners
     addRowButton.addEventListener("click", addRow);
     deleteRowButton.addEventListener("click", deleteRow);
 
@@ -90,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
         updateMatrix();
     });
 
-    // Function to handle Excel file upload
     const handleExcelUpload = () => {
         const fileInput = document.getElementById('excelFileInput');
         const file = fileInput.files[0];
@@ -101,11 +94,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, { type: 'array' });
 
-                // Assuming the first sheet is where data is located
                 const sheetName = workbook.SheetNames[0];
                 const sheet = workbook.Sheets[sheetName];
 
-                // Initialize all cells with 0
                 for (let impact = 1; impact <= 5; impact++) {
                     for (let probability = 1; probability <= 5; probability++) {
                         const cell = document.getElementById(`${impact}-${probability}`);
@@ -113,14 +104,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
 
-                // Process each row from Excel and populate the matrix
-                const jsonData = XLSX.utils.sheet_to_json(sheet);
-                jsonData.forEach((row, index) => {
-                    const description = row['Описание'];
-                    const impact = parseInt(row['Влияние']);
-                    const probability = parseInt(row['Вероятность']);
+               
+                const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                jsonData.slice(1).forEach((row) => {
+                    const probability = parseInt(row[5]);  
+                    const impact = parseInt(row[6]);       
 
-                    // Validate impact and probability values
                     if (!isNaN(impact) && !isNaN(probability) && impact >= 1 && impact <= 5 && probability >= 1 && probability <= 5) {
                         const cell = document.getElementById(`${impact}-${probability}`);
                         let currentCount = parseInt(cell.textContent) || 0;
@@ -134,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    // Event listener for Excel upload button
     const uploadExcelButton = document.getElementById('uploadExcel');
     uploadExcelButton.addEventListener('click', handleExcelUpload);
 });
