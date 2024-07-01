@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     cell.setAttribute("data-risk-level", "low");
                 } else if (riskValue >= 3 && riskValue <= 6 && riskValue !== 5) {
                     cell.setAttribute("data-risk-level", "medium");
-                } else if (riskValue >= 5 && riskValue <= 12) {
+                } else if (riskValue >= 5 && riskValue <= 12 && riskValue !== 6) {
                     cell.setAttribute("data-risk-level", "high");
                 } else {
                     cell.setAttribute("data-risk-level", "very-high");
@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", function() {
                
                 const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
                 jsonData.slice(1).forEach((row) => {
-                    const probability = parseInt(row[5]);  
-                    const impact = parseInt(row[6]);       
+                    const probability = parseInt(row[7]);  
+                    const impact = parseInt(row[8]);       
 
                     if (!isNaN(impact) && !isNaN(probability) && impact >= 1 && impact <= 5 && probability >= 1 && probability <= 5) {
                         const cell = document.getElementById(`${impact}-${probability}`);
